@@ -216,6 +216,26 @@
     }
   }
 
+  /* FAQ — collapsible tiles; the + rotates to × and answers rise in */
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq summary {
+    list-style: none;
+  }
+  .faq summary:hover {
+    color: rgb(var(--accent));
+  }
+  .faq-mark {
+    transition: transform 180ms ease;
+  }
+  .faq[open] .faq-mark {
+    transform: rotate(45deg);
+  }
+  .faq[open] .faq-answer {
+    animation: rise 0.24s ease both;
+  }
+
   /* Terminal caret for in-flight statuses */
   .caret::after {
     content: "▍";
@@ -240,8 +260,12 @@
     .progress-fill,
     .live-dot,
     .live-dot::after,
-    .caret::after {
+    .caret::after,
+    .faq[open] .faq-answer {
       animation: none;
+    }
+    .faq-mark {
+      transition: none;
     }
     .word-in {
       opacity: 1;
