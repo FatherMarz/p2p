@@ -36,7 +36,7 @@ export class Mailbox {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ action: "create" }),
     });
-    if (!res.ok) throw new Error("Could not create a code — try again");
+    if (!res.ok) throw new Error("Could not create a code. Try again.");
     const { code } = (await res.json()) as { code: string };
     return code;
   }

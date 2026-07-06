@@ -333,7 +333,7 @@ export class P2PEngine {
       // No disk streaming in this browser and the file won't fit in memory.
       transfers.update(t.id, {
         status: "failed",
-        error: "Too large for this browser — use desktop Chrome, Edge or Brave",
+        error: "Too large for this browser. Use desktop Chrome, Edge or Brave",
       });
       this.sendControl({ t: "decline", transferId: t.id, reason: "too-big" });
       return;

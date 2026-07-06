@@ -79,7 +79,7 @@ export default function Home() {
         const kind = err instanceof Error ? err.message : "dead";
         setError(
           kind === "claimed"
-            ? "That passphrase was already used. Each one works exactly once — ask for a fresh one."
+            ? "That passphrase was already used. Each one works exactly once. Ask for a fresh one."
             : "That passphrase isn't live. Check the spelling, or ask the sender for a fresh one (their tab has to stay open).",
         );
       })
@@ -110,7 +110,7 @@ export default function Home() {
         <header className="mb-10 text-center">
           <h1 className="display text-4xl text-accent">p2p</h1>
           <p className="mt-2 text-sm text-text-muted">
-            One-time passphrase. Browser to browser. Nothing stored.
+            One-time passphrase. Encrypted, browser to browser. Nothing stored.
           </p>
         </header>
 
@@ -194,7 +194,7 @@ export default function Home() {
             <div className="tile p-6 text-center">
               <span className="live-dot mr-2" />
               <span className="text-sm text-text-muted">
-                {mode === "send" ? "Peer found — connecting…" : "Connecting to the sender…"}
+                {mode === "send" ? "Peer found, connecting…" : "Connecting to the sender…"}
               </span>
             </div>
           )}
@@ -229,7 +229,7 @@ export default function Home() {
           {/* Receiver done — hint that the line is still open */}
           {mode === "receive" && session === "connected" && transfer?.status === "done" && (
             <p className="text-center text-xs text-text-muted">
-              Still connected — they can send another file without a new passphrase.
+              Still connected. They can send another file without a new passphrase.
             </p>
           )}
 
