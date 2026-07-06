@@ -1,6 +1,6 @@
 # p2p
 
-One-time passphrase, browser-to-browser file transfer. Live at [p2p.modul4r.com](https://p2p.modul4r.com).
+One-time passphrase, browser-to-browser file transfer. Live at [file.modul4r.com](https://file.modul4r.com).
 
 Sender picks a file and gets a three-word passphrase. Receiver types it in, accepts, and the file streams directly between the two browsers over a WebRTC data channel. Nothing is uploaded; the only server-side state is the handshake mailbox (offer/answer/ICE) in Neon, reaped minutes after the sender leaves.
 
