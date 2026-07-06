@@ -114,7 +114,7 @@ export default function Home() {
       <main className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-5 pt-14">
         <header className="rise mb-10 text-center">
           <div className="stamp justify-center">File Transfer</div>
-          <h1 className="display mt-2 text-4xl text-accent">p2p</h1>
+          <h1 className="display mt-2 text-4xl text-accent">p2p file</h1>
           <p className="mt-3 text-sm text-text-muted">
             Send a file with a one-time passphrase. Encrypted, browser to browser.
             Nothing stored.
