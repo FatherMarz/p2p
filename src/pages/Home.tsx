@@ -6,6 +6,7 @@ import PassphraseCard from "@/components/PassphraseCard";
 import AcceptPrompt from "@/components/AcceptPrompt";
 import TransferPanel from "@/components/TransferPanel";
 import SiteFooter from "@/components/SiteFooter";
+import Faq from "@/components/Faq";
 import { formatBytes } from "@/lib/format";
 
 type Mode = "landing" | "send" | "receive";
@@ -163,6 +164,7 @@ export default function Home() {
                   Type it in and the file comes straight to you.
                 </p>
               </button>
+              <Faq />
             </>
           )}
 
