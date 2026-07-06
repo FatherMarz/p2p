@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* p2p — night HUD. Baked from the modul4r "tundra" theme. */
+    --bg: 36 39 33;
+    --surface: 52 56 47;
+    --surface-alt: 122 128 87;
+    --text: 232 229 217;
+    --text-muted: 160 158 143;
+    --border: 94 99 83;
+    --accent: 214 156 74;
+    --accent-fg: 26 28 23;
+
+    --font-display: "JetBrains Mono", ui-monospace, monospace;
+    --font-body: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  html,
+  body,
+  #root {
+    @apply min-h-screen;
+  }
+
+  body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: rgb(var(--accent));
+    color: rgb(var(--accent-fg));
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: rgb(var(--bg));
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--border));
+  }
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* Page ground — scanlines + faint gold glow, the tundra night HUD */
+  .page {
+    min-height: 100vh;
+    background-color: rgb(var(--bg));
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 2px,
+        rgb(var(--text) / 0.035) 2px,
+        rgb(var(--text) / 0.035) 3px
+      ),
+      radial-gradient(ellipse at 50% 0%, rgb(var(--accent) / 0.05), transparent 60%);
+  }
+
+  /* Tile — tundra variant: hairline border, translucent surface, no hard shadow */
+  .tile {
+    position: relative;
+    background-color: rgb(var(--surface) / 0.6);
+    color: rgb(var(--text));
+    border: 1px solid rgb(var(--border));
+    transition:
+      border-color 150ms ease,
+      background-color 150ms ease;
+  }
+  .tile-interactive:hover {
+    border-color: rgb(var(--accent));
+    background-color: rgb(var(--surface) / 0.85);
+  }
+  .tile-accent {
+    background-color: rgb(var(--accent));
+    color: rgb(var(--accent-fg));
+  }
+
+  /* Blinking live dot */
+  .live-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: rgb(var(--accent));
+    border-radius: 9999px;
+    animation: liveBlink 2.4s ease-in-out infinite;
+  }
+  @keyframes liveBlink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.7rem 1.15rem;
+    border: 1px solid rgb(var(--border));
+    background-color: rgb(var(--surface) / 0.6);
+    color: rgb(var(--text));
+    cursor: pointer;
+    transition:
+      border-color 120ms ease,
+      background-color 120ms ease,
+      color 120ms ease;
+    text-decoration: none;
+  }
+  .btn:hover {
+    border-color: rgb(var(--accent));
+    color: rgb(var(--accent));
+  }
+  .btn-primary {
+    background-color: rgb(var(--accent));
+    border-color: rgb(var(--accent));
+    color: rgb(var(--accent-fg));
+  }
+  .btn-primary:hover {
+    background-color: rgb(var(--accent) / 0.85);
+    color: rgb(var(--accent-fg));
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn:focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
+
+  /* Uppercase HUD label */
+  .stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgb(var(--accent));
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+
+  a.link {
+    color: rgb(var(--text));
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--accent));
+    text-underline-offset: 3px;
+  }
+  a.link:hover {
+    color: rgb(var(--accent));
+  }
+}
