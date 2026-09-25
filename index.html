@@ -6,7 +6,7 @@
     <title>P2P File | Home</title>
     <meta
       name="description"
-      content="Send a file directly from your browser to someone else's with a one-time passphrase. Peer-to-peer and end-to-end encrypted; nothing uploaded, nothing stored."
+      content="Send a file straight from your browser to another browser with a one-time passphrase. Peer-to-peer, end-to-end encrypted, and never uploaded or stored."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="https://file.modul4r.com/" />
@@ -23,19 +23,21 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://file.modul4r.com/" />
-    <meta property="og:title" content="p2p file — one-time browser-to-browser file transfer" />
+    <meta property="og:title" content="P2P File | Home" />
     <meta
       property="og:description"
-      content="Send a file directly from your browser to someone else's with a one-time passphrase. Peer-to-peer and end-to-end encrypted; nothing uploaded, nothing stored."
+      content="Send a file straight from your browser to another browser with a one-time passphrase. Peer-to-peer, end-to-end encrypted, and never uploaded or stored."
     />
-    <meta property="og:site_name" content="p2p file — a Modul4r tool" />
+    <meta property="og:image" content="https://file.modul4r.com/og.png" />
+    <meta property="og:site_name" content="P2P File" />
 
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="p2p file — one-time browser-to-browser file transfer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="P2P File | Home" />
     <meta
       name="twitter:description"
-      content="Send a file directly browser to browser with a one-time passphrase. End-to-end encrypted; nothing stored."
+      content="Send a file straight from your browser to another browser with a one-time passphrase. Peer-to-peer, end-to-end encrypted, and never uploaded or stored."
     />
+    <meta name="twitter:image" content="https://file.modul4r.com/og.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -47,26 +49,59 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "p2p file",
-        "url": "https://file.modul4r.com/",
-        "applicationCategory": "UtilitiesApplication",
-        "operatingSystem": "Any",
-        "description": "One-time passphrase, direct browser-to-browser file transfer. Peer-to-peer via WebRTC; files are never uploaded or stored.",
-        "offers": { "@type": "Offer", "price": "0" },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Modul4r",
-          "url": "https://modul4r.com"
-        }
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://file.modul4r.com/#org",
+            "name": "Modul4r",
+            "url": "https://modul4r.com/"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://file.modul4r.com/#website",
+            "name": "P2P File",
+            "url": "https://file.modul4r.com/",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://file.modul4r.com/#org" }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://file.modul4r.com/#app",
+            "name": "P2P File",
+            "url": "https://file.modul4r.com/",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Any",
+            "description": "One-time passphrase, direct browser-to-browser file transfer. Peer-to-peer via WebRTC; the file itself is never uploaded or stored.",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+            "publisher": { "@id": "https://file.modul4r.com/#org" }
+          }
+        ]
       }
     </script>
   </head>
   <body>
     <div id="root"></div>
     <noscript>
-      p2p is a browser-to-browser file transfer tool and needs JavaScript.
-      More tools at <a href="https://modul4r.com">modul4r.com</a>.
+      <h1>P2P File — send a file browser-to-browser with a one-time passphrase</h1>
+      <p>
+        P2P File sends a file straight from one browser to another over a
+        peer-to-peer WebRTC connection. Pick a file and get a three-word
+        passphrase; the other person types it into this same page and
+        accepts. Our server only relays the small handshake notes the two
+        browsers need to find each other — the file itself never passes
+        through it, is never uploaded, and is never stored. The connection
+        is end-to-end encrypted (DTLS). Desktop Chrome, Edge and Brave can
+        receive files up to 16GB; Firefox, Safari and mobile browsers are
+        capped at 250MB because they must hold the file in memory. Each
+        passphrase works once, expires after a few minutes if unused, and
+        both tabs must stay open for the transfer to complete. This page
+        requires JavaScript to run the file transfer.
+      </p>
+      <p>
+        <a href="https://file.modul4r.com/">Open P2P File</a> ·
+        <a href="https://github.com/FatherMarz/p2p">Source on GitHub</a> ·
+        More tools at <a href="https://modul4r.com">modul4r.com</a>.
+      </p>
     </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>

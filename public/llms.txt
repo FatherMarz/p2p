@@ -1,0 +1,42 @@
+# P2P File
+
+> P2P File sends a file straight from one browser to another using a
+> one-time passphrase. Peer-to-peer over WebRTC; the file itself is never
+> uploaded to a server or stored.
+
+The whole tool is one page. Pick a file, get a three-word passphrase, and
+share it however you like. The other person opens this same page, types the
+passphrase in, and accepts the file.
+
+## How it works
+
+- The sender picks a file and gets a passphrase like "correct-horse-battery".
+- The receiver types the passphrase into the same site and accepts the
+  transfer.
+- The file streams directly between the two browsers over a WebRTC data
+  channel, encrypted end-to-end with DTLS.
+- The server only relays the small handshake messages the two browsers need
+  to find each other. The file itself never touches the server.
+
+## Limits
+
+- Each passphrase works once, then it is gone. It also dies if the sender
+  closes their tab, or after a few minutes if nobody claims it.
+- Desktop Chrome, Edge and Brave save the file to disk as it arrives, so
+  transfers up to 16GB are allowed. Firefox, Safari and mobile browsers must
+  hold the file in memory first, so they are capped at 250MB.
+- Both browser tabs must stay open for the whole transfer. There is no
+  resume if either side closes early.
+
+## Cost and account
+
+- Free. No account, no sign-up, no upload limit tracking.
+
+## Links
+
+- [Open P2P File](https://file.modul4r.com/): the tool itself.
+- [Source](https://github.com/FatherMarz/p2p): open source on GitHub.
+
+## Contact
+
+A Modul4r tool. See https://modul4r.com/ for other projects.
