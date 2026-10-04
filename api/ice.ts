@@ -1,6 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-// Mirrors an earlier app's ice-servers builder (an earlier app).
 // TURN is optional: unset env = STUN-only, which covers most home networks.
 // The relay is advertised over both UDP and TCP so guests on UDP-blocking
 // networks (corporate/guest wifi) still gather a usable relay candidate.

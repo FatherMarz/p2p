@@ -2,17 +2,17 @@
 
 One-time passphrase, browser-to-browser file transfer. Live at [file.modul4r.com](https://file.modul4r.com).
 
-Sender picks a file and gets a three-word passphrase. Receiver types it in, accepts, and the file streams directly between the two browsers over a WebRTC data channel. Nothing is uploaded; the only server-side state is the handshake mailbox (offer/answer/ICE) in Neon, reaped minutes after the sender leaves.
+Sender picks a file and gets a three-word passphrase. Receiver types it in, accepts, and the file streams directly between the two browsers over a WebRTC data channel. Nothing is uploaded. The only server-side state is the handshake mailbox (offer, answer, ICE) in Neon, removed minutes after the sender leaves.
 
-The transfer engine is ported from an earlier app's P2P file transfer: negotiated data channel, 256KB chunks with backpressure, streams straight to disk on desktop Chromium (File System Access API), 250MB in-memory fallback elsewhere.
+Transfers use a negotiated data channel with 256KB chunks and backpressure. Desktop Chromium streams straight to disk (File System Access API). Other browsers fall back to in-memory assembly, capped at 250MB.
 
 ## Stack
 
-- Vite + React + TS + Tailwind (static SPA)
+- Vite, React, TypeScript, Tailwind (static single-page app)
 - Vercel serverless functions in `api/` + Neon Postgres as a polling signaling mailbox
-- Optional TURN relay via `TURN_URL` / `TURN_USERNAME` / `TURN_CREDENTIAL` / `TURN_EXTRA_URLS` env vars (STUN-only without them)
+- Optional TURN relay, set with the `TURN_URL` / `TURN_USERNAME` / `TURN_CREDENTIAL` / `TURN_EXTRA_URLS` environment variables (STUN only without them)
 
-## Dev
+## Development
 
 ```bash
 npm install
@@ -22,3 +22,5 @@ npm run dev                                                                     
 node scripts/e2e.mjs            # two-browser transfer + hash check
 node scripts/e2e-lifecycle.mjs  # disposable-passphrase semantics
 ```
+
+Built by Marcello Delcaro, AI-assisted.

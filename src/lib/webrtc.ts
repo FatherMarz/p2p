@@ -1,8 +1,6 @@
 import { transfers, session } from "@/stores/transferStore";
 
-// Engine ported from an earlier app's P2P file transfer
-// (basecamp/client/src/lib/webrtc.ts). Same wire protocol and constants;
-// simplified from a voice-mesh side channel to a dedicated 1:1 connection.
+// WebRTC transfer engine: one dedicated 1:1 connection per session.
 // The sender is always the offerer, so there is no signaling glare.
 
 const DEFAULT_ICE: RTCConfiguration = {
@@ -48,9 +46,8 @@ function progressStep(totalBytes: number): number {
 }
 
 // Control messages are JSON strings; payload is raw ArrayBuffer chunks.
-// meta/accept/decline replace an earlier app's Socket.IO consent handshake — here
-// they ride the same data channel, before any bytes flow. One active transfer
-// at a time, so bare binary chunks unambiguously belong to the inbound one.
+// meta/accept/decline form the consent handshake and ride the data channel
+// before any bytes flow. One active transfer at a time, so bare binary chunks unambiguously belong to the inbound one.
 type ControlMessage =
   | { t: "meta"; transferId: string; name: string; size: number; mime: string }
   | { t: "accept"; transferId: string }
@@ -223,7 +220,7 @@ export class P2PEngine {
 
   /** First failure: the direct path is unusable for this pair. Flip to
    *  TURN-only before restarting so ICE re-gathers relay candidates instead of
-   *  re-selecting the same broken srflx pair (the an earlier app cross-network fix).
+   *  re-selecting the same broken srflx pair.
    *  Only the sender initiates the restart offer — no glare. */
   private handleFailure() {
     if (this.closed || !this.pc) return;
@@ -244,7 +241,7 @@ export class P2PEngine {
     }
   }
 
-  // --- File transfer (ported verbatim from an earlier app where possible) ---------
+  // --- File transfer ---------------------------------------------------------
 
   private wireDataChannel(dc: RTCDataChannel) {
     dc.onclose = () => {

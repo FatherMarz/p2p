@@ -77,7 +77,7 @@ if (typeof window !== "undefined") {
   });
 }
 
-// Test hook for Playwright (mirrors the earlier drive-hook pattern).
+// Test hook for the Playwright e2e scripts.
 declare global {
   interface Window {
     __p2p?: {

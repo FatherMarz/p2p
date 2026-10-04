@@ -1,6 +1,6 @@
 // End-to-end: two Chromium contexts transfer a real file through the full
 // stack (mailbox handshake -> WebRTC data channel), then verify the bytes.
-// Run with the dev api (:3000) and vite (:5175) already up.
+// Run with the dev api (:3210) and vite (:5175) already up.
 import { chromium } from "playwright";
 import { createHash, randomBytes } from "node:crypto";
 import { mkdtempSync, writeFileSync, readFileSync } from "node:fs";
