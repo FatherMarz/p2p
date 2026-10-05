@@ -24,3 +24,7 @@ node scripts/e2e-lifecycle.mjs  # disposable-passphrase semantics
 ```
 
 Built by Marcello Delcaro, AI-assisted.
+
+## License
+
+MIT
