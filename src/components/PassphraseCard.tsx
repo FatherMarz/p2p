@@ -20,7 +20,7 @@ export default function PassphraseCard({ code }: { code: string }) {
       className="text-center"
     >
       <div
-        className="sweep display select-all break-words text-2xl text-accent sm:text-3xl"
+        className="sweep select-all break-words font-mono text-2xl font-semibold text-accent sm:text-3xl"
         data-testid="passphrase"
         aria-label={code}
       >

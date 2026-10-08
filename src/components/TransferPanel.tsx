@@ -32,7 +32,7 @@ export default function TransferPanel({ transfer }: { transfer: Transfer }) {
 
         {transfer.status === "transferring" && (
           <>
-            <div className="mt-4 h-2 border border-border bg-bg">
+            <div className="mt-4 h-2 overflow-hidden rounded-full border border-border bg-bg">
               <div
                 className="progress-fill h-full transition-[width] duration-200"
                 style={{ width: `${pct}%` }}

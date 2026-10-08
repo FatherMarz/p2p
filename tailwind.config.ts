@@ -15,7 +15,7 @@ export default {
         "accent-fg": "rgb(var(--accent-fg) / <alpha-value>)",
       },
       fontFamily: {
-        display: ['"JetBrains Mono"', "ui-monospace", "monospace"],
+        display: ['"Bricolage Grotesque"', "system-ui", "sans-serif"],
         mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
       },
     },

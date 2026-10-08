@@ -4,18 +4,19 @@
 
 @layer base {
   :root {
-    /* p2p — night HUD. Baked from the modul4r "tundra" theme. */
-    --bg: 36 39 33;
-    --surface: 52 56 47;
-    --surface-alt: 122 128 87;
-    --text: 232 229 217;
-    --text-muted: 160 158 143;
-    --border: 94 99 83;
-    --accent: 214 156 74;
-    --accent-fg: 26 28 23;
+    /* p2p: black ground, one cyan-to-mint beam between two devices. */
+    --bg: 9 10 14;
+    --surface: 19 21 28;
+    --surface-alt: 30 33 43;
+    --text: 238 242 245;
+    --text-muted: 142 150 164;
+    --border: 39 43 55;
+    --accent: 25 240 194;
+    --accent-fg: 4 20 16;
+    --beam: linear-gradient(90deg, #00d4ff, #19f0c2 55%, #8dff6a);
 
-    --font-display: "JetBrains Mono", ui-monospace, monospace;
-    --font-body: "JetBrains Mono", ui-monospace, monospace;
+    --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
   }
 
   html,
@@ -50,38 +51,93 @@
 @layer components {
   .display {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: 0.04em;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .beam-text {
+    background: var(--beam);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
-  /* Page ground — scanlines + faint gold glow, the tundra night HUD */
+  /* Page ground: a soft beam glow at the top, a faint dot grid */
   .page {
     min-height: 100vh;
     background-color: rgb(var(--bg));
     background-image:
-      repeating-linear-gradient(
-        to bottom,
-        transparent 0,
-        transparent 2px,
-        rgb(var(--text) / 0.035) 2px,
-        rgb(var(--text) / 0.035) 3px
-      ),
-      radial-gradient(ellipse at 50% 0%, rgb(var(--accent) / 0.05), transparent 60%);
+      radial-gradient(ellipse 70% 40% at 50% -5%, rgb(0 212 255 / 0.16), transparent 70%),
+      radial-gradient(rgb(var(--text) / 0.05) 1px, transparent 1px);
+    background-size:
+      100% 100%,
+      22px 22px;
+  }
+
+  /* Hero: two devices and a pulse moving between them */
+  .hero-beam {
+    display: flex;
+    align-items: center;
+    width: 220px;
+  }
+  .hero-beam .node {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    flex: none;
+    box-shadow: 0 0 24px currentColor;
+  }
+  .hero-beam .node-a {
+    color: #00d4ff;
+    background: radial-gradient(circle, rgb(var(--bg)) 32%, #00d4ff 34%);
+  }
+  .hero-beam .node-b {
+    color: #8dff6a;
+    background: radial-gradient(circle, rgb(var(--bg)) 32%, #8dff6a 34%);
+  }
+  .hero-beam .wire {
+    position: relative;
+    flex: 1;
+    height: 4px;
+    margin: 0 -2px;
+    border-radius: 999px;
+    background: var(--beam);
+    opacity: 0.9;
+    overflow: hidden;
+  }
+  .hero-beam .pulse {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    from {
+      left: -40px;
+    }
+    to {
+      left: 100%;
+    }
   }
 
   /* Tile — tundra variant: hairline border, translucent surface, no hard shadow */
   .tile {
     position: relative;
-    background-color: rgb(var(--surface) / 0.6);
+    background-color: rgb(var(--surface) / 0.85);
     color: rgb(var(--text));
     border: 1px solid rgb(var(--border));
+    border-radius: 20px;
     transition:
-      border-color 150ms ease,
-      background-color 150ms ease;
+      border-color 180ms ease,
+      background-color 180ms ease,
+      transform 180ms ease,
+      box-shadow 180ms ease;
   }
   .tile-interactive:hover {
-    border-color: rgb(var(--accent));
-    background-color: rgb(var(--surface) / 0.85);
+    border-color: rgb(var(--accent) / 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -20px rgb(var(--accent) / 0.5);
   }
   .tile-accent {
     background-color: rgb(var(--accent));
@@ -199,6 +255,7 @@
 
   /* Progress fill — scanline shimmer while bytes move */
   .progress-fill {
+    border-radius: 999px;
     background-color: rgb(var(--accent));
     background-image: repeating-linear-gradient(
       -45deg,
@@ -261,7 +318,8 @@
     .live-dot,
     .live-dot::after,
     .caret::after,
-    .faq[open] .faq-answer {
+    .faq[open] .faq-answer,
+    .hero-beam .pulse {
       animation: none;
     }
     .faq-mark {
@@ -280,10 +338,10 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    padding: 0.7rem 1.15rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    padding: 0.75rem 1.3rem;
+    border-radius: 999px;
     border: 1px solid rgb(var(--border));
     background-color: rgb(var(--surface) / 0.6);
     color: rgb(var(--text));
@@ -299,12 +357,13 @@
     color: rgb(var(--accent));
   }
   .btn-primary {
-    background-color: rgb(var(--accent));
-    border-color: rgb(var(--accent));
+    background: var(--beam);
+    border-color: transparent;
     color: rgb(var(--accent-fg));
   }
   .btn-primary:hover {
-    background-color: rgb(var(--accent) / 0.85);
+    filter: brightness(1.08);
+    border-color: transparent;
     color: rgb(var(--accent-fg));
   }
   .btn:disabled {
@@ -322,9 +381,9 @@
     align-items: center;
     gap: 0.4rem;
     color: rgb(var(--accent));
-    font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     font-size: 11px;
   }

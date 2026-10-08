@@ -114,8 +114,16 @@ export default function Home() {
     <div className="page" onDragOver={(e) => e.preventDefault()} onDrop={onDrop}>
       <main className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-5 pt-14">
         <header className="rise mb-10 text-center">
-          <div className="stamp justify-center">File Transfer</div>
-          <h1 className="display mt-2 text-4xl text-accent">p2p file</h1>
+          <div className="hero-beam mx-auto" aria-hidden>
+            <span className="node node-a" />
+            <span className="wire">
+              <span className="pulse" />
+            </span>
+            <span className="node node-b" />
+          </div>
+          <h1 className="display mt-4 text-5xl">
+            p2p <span className="beam-text">file</span>
+          </h1>
           <p className="mt-3 text-sm text-text-muted">
             Send a file with a one-time passphrase. Encrypted, browser to browser.
             Nothing stored.
@@ -143,7 +151,7 @@ export default function Home() {
                     →
                   </span>
                 </div>
-                <div className="text-lg font-semibold">Pick a file</div>
+                <div className="display text-2xl">Pick a file</div>
                 <p className="mt-2 text-sm text-text-muted">
                   or drop it anywhere on the page. You get a passphrase to pass along.
                 </p>
@@ -159,7 +167,7 @@ export default function Home() {
                     →
                   </span>
                 </div>
-                <div className="text-lg font-semibold">I have a passphrase</div>
+                <div className="display text-2xl">I have a passphrase</div>
                 <p className="mt-2 text-sm text-text-muted">
                   Type it in and the file comes straight to you.
                 </p>
@@ -184,7 +192,7 @@ export default function Home() {
                 <input
                   id="passphrase"
                   data-testid="passphrase-input"
-                  className="mt-3 w-full border border-border bg-bg px-4 py-3 font-mono text-lg text-text outline-none focus:border-accent"
+                  className="mt-3 w-full rounded-2xl border border-border bg-bg px-4 py-3 font-mono text-lg text-text outline-none focus:border-accent"
                   placeholder="correct-horse-battery"
                   value={receiveInput}
                   onChange={(e) => setReceiveInput(e.target.value)}
