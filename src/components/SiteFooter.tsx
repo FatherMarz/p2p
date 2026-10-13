@@ -13,7 +13,11 @@ export default function SiteFooter() {
         ·{" "}
         <a className="link" href="https://github.com/FatherMarz/p2p">
           GitHub
-        </a>
+        </a>{" "}
+        ·{" "}
+        <button type="button" data-cookie-settings className="link">
+          Cookie&nbsp;settings
+        </button>
       </p>
     </footer>
   );
